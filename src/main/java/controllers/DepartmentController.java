@@ -1,4 +1,4 @@
-package com.kindsonthegenius.demo;
+package controllers;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,15 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-
+/*
 @RestController
-public class HomeController {
+@RequestMapping("/myapp")
+public class DepartmentController {
 
-	@RequestMapping(value = "/")
-	public static String Welcome() {
-		return "Welcome to Spring Boot";
-	}
-	
 	@Autowired
 	private RestTemplate restTemplate;
 	
@@ -27,3 +23,4 @@ public class HomeController {
 		return Arrays.asList(objects);
 	}
 }
+*/
