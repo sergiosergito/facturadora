@@ -13,6 +13,8 @@ import org.springframework.web.client.RestTemplate;
 public class HomeController {
 
 	private final static String URL = "http://localhost:8080/tarifas";
+	private final static String ARCHIVO_URL_SQL = "http://localhost:4567/sql/facturar/70712345";
+	
 	
 	@RequestMapping(value = "/")
 	public static String Welcome() {
@@ -26,6 +28,14 @@ public class HomeController {
 	public List<Object> getCountries(){
 		
 		Object[] objects = restTemplate.getForObject(URL,Object[].class);
+		return Arrays.asList(objects);
+	}
+	
+	@GetMapping("/get/cdr")
+	public List<Object> getNumberCDR(){
+		
+		Object[] objects = restTemplate.getForObject("http://localhost:4567/sql/facturar/70712345",Object[].class);
+		
 		return Arrays.asList(objects);
 	}
 }
