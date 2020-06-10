@@ -9,10 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 @RestController
 public class HomeController {
 
-	private final static String URL = "http://localhost:8080/tarifas";
+	private final static String TEST_URL = "http://localhost:8080/tarifas";
 	private final static String ARCHIVO_URL_SQL = "http://localhost:4567/sql/facturar/70712345";
 	
 	
@@ -27,15 +32,38 @@ public class HomeController {
 	@GetMapping("/get/tarifas")
 	public List<Object> getCountries(){
 		
-		Object[] objects = restTemplate.getForObject(URL,Object[].class);
+		Object[] objects = restTemplate.getForObject(TEST_URL,Object[].class);
 		return Arrays.asList(objects);
 	}
 	
 	@GetMapping("/get/cdr")
-	public List<Object> getNumberCDR(){
-		
+	public String getNumberCDR(){
+		/*
 		Object[] objects = restTemplate.getForObject("http://localhost:4567/sql/facturar/70712345",Object[].class);
-		
 		return Arrays.asList(objects);
+		*/
+		String response="";
+		try {
+			URL url = new URL(ARCHIVO_URL_SQL);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			if(conn.getResponseCode() != 200) {
+				throw new RuntimeException("Failed : HTTP Error code : " + conn.getResponseCode());
+			}
+			InputStreamReader in = new InputStreamReader(conn.getInputStream());
+			BufferedReader br = new BufferedReader(in);
+			String output;
+			while((output = br.readLine()) != null){
+				System.out.println(output);
+				response += output;
+			}
+		} catch(Exception e) {
+			 System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+	         System.exit(0);
+		}
+		return response;
 	}
+	
+	
+	
 }
