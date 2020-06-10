@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -18,7 +19,7 @@ import java.net.URL;
 public class HomeController {
 
 	private final static String TEST_URL = "http://localhost:8080/tarifas";
-	private final static String ARCHIVO_URL_SQL = "http://localhost:4567/sql/facturar/70712345";
+	private final static String ARCHIVO_URL_SQL = "http://localhost:4567/sql/facturar";///70712345";
 	
 	
 	@RequestMapping(value = "/")
@@ -36,15 +37,11 @@ public class HomeController {
 		return Arrays.asList(objects);
 	}
 	
-	@GetMapping("/get/cdr")
-	public String getNumberCDR(){
-		/*
-		Object[] objects = restTemplate.getForObject("http://localhost:4567/sql/facturar/70712345",Object[].class);
-		return Arrays.asList(objects);
-		*/
+	@RequestMapping("/get/cdr/{number}")
+	public String getNumberCDR(@PathVariable("number")String number){
 		String response="";
 		try {
-			URL url = new URL(ARCHIVO_URL_SQL);
+			URL url = new URL(ARCHIVO_URL_SQL + "/" + number);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			if(conn.getResponseCode() != 200) {
