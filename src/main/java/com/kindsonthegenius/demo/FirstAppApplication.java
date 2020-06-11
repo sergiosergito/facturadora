@@ -12,6 +12,8 @@ public class FirstAppApplication {
 	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
 	}
+	
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(FirstAppApplication.class, args);

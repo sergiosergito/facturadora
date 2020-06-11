@@ -3,7 +3,14 @@ package com.kindsonthegenius.demo;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -19,6 +27,8 @@ import java.net.URL;
 public class HomeController {
 
 	private final static String ARCHIVO_URL_SQL = "http://localhost:4567/sql/facturar";///70712345";
+	private final static String RATES_JSP_FILE = "show-rates.jsp";
+	private final static String TEST_HTML = "test.html";
 	private final static String TEST_URL = "http://localhost:8080/tarifas";
 	
 	public void decoder(String unformated) {
@@ -31,7 +41,7 @@ public class HomeController {
 		Object[] objects = restTemplate.getForObject(TEST_URL,Object[].class);
 		return Arrays.asList(objects);
 	}
-	
+		
 	@RequestMapping("/get/cdr/{number}")
 	public String getNumberCDR(@PathVariable("number")String number){
 		String response="";
@@ -57,6 +67,11 @@ public class HomeController {
 		}
 		return response;
 	}
+	
+	@RequestMapping("/mensaje")
+    public String mensaje() {
+        return "mensaje";
+    }
 	
 	@Autowired
 	private RestTemplate restTemplate;
