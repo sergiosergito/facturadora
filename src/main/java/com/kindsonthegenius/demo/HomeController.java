@@ -18,18 +18,13 @@ import java.net.URL;
 @RestController
 public class HomeController {
 
-	private final static String TEST_URL = "http://localhost:8080/tarifas";
 	private final static String ARCHIVO_URL_SQL = "http://localhost:4567/sql/facturar";///70712345";
+	private final static String TEST_URL = "http://localhost:8080/tarifas";
 	
-	
-	@RequestMapping(value = "/")
-	public static String Welcome() {
-		return "Welcome to Spring Boot";
+	public void decoder(String unformated) {
+		System.out.println(unformated);
 	}
-	
-	@Autowired
-	private RestTemplate restTemplate;
-	
+
 	@GetMapping("/get/tarifas")
 	public List<Object> getCountries(){
 		
@@ -54,6 +49,8 @@ public class HomeController {
 				System.out.println(output);
 				response += output;
 			}
+			decoder(response);
+			
 		} catch(Exception e) {
 			 System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 	         System.exit(0);
@@ -61,6 +58,12 @@ public class HomeController {
 		return response;
 	}
 	
+	@Autowired
+	private RestTemplate restTemplate;
 	
+	@RequestMapping(value = "/")
+	public static String Welcome() {
+		return "Welcome to Spring Boot";
+	}
 	
 }
