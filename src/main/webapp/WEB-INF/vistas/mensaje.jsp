@@ -6,6 +6,6 @@
 	</head>
 
 	<body>
-	hola desde spring
+	hola desde spring si funciona mensjes.jsp
 	</body>
 </html>

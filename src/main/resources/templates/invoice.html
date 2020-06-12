@@ -1,9 +1,9 @@
 <%@page language="java" contenType = "text/html" pageEncoding = "UTF-8"%>
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>menu</title>
+		<title>FACTURA</title>
 	</head>
 	<body>
 		<h1>Buscar Mayor</h1>
@@ -16,6 +16,15 @@
 			<p><input type = "submit" name = "" value="BUSCAR MAYOR"></p>
 		</form>
 		
-		<a href = "index.html">[VOLVER]</a>
+		<a href = "/get/cdr/70712345">[Facturar]</a>
+		<a href = "/home">[VOLVER]</a>
+		
+		<form action="login">
+  			User Name:<input type="text" name="userName"/><br/>
+  			Password:<input type="password" name="userPassword"/><br/>
+  			<input type="submit" value="submit"/>
+		</form>
+		
+		
 	</body>
 </html>

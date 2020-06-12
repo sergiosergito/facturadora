@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
+import Models.SoyUnico;
+
 @SpringBootApplication
 public class FirstAppApplication {
 	
@@ -14,8 +16,10 @@ public class FirstAppApplication {
 	}
 	
 	
+	
 
 	public static void main(String[] args) {
+		SoyUnico ricardo = SoyUnico.getSingletonInstance("Ricardo Moya");
 		SpringApplication.run(FirstAppApplication.class, args);
 		System.out.println("Welcome to Spring Boot Tutorials");
 	}

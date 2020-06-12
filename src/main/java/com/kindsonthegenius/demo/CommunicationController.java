@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import Models.SoyUnico;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -24,17 +26,23 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 @RestController
-public class HomeController {
+public class CommunicationController {
 
 	private final static String ARCHIVO_URL_SQL = "http://localhost:4567/sql/facturar";///70712345";
 	private final static String RATES_JSP_FILE = "show-rates.jsp";
 	private final static String TEST_HTML = "test.html";
 	private final static String TEST_URL = "http://localhost:8080/tarifas";
-	
+	SoyUnico ricardo = SoyUnico.getSingletonInstance("Ricardo Moya");
+	/*
 	public void decoder(String unformated) {
 		System.out.println(unformated);
 	}
-
+	*/
+	/*
+	public void decoder(HttpServletResponse response) throws IOException  {
+		response.sendRedirect("/");
+	}
+	*/
 	@GetMapping("/get/tarifas")
 	public List<Object> getCountries(){
 		
@@ -43,7 +51,7 @@ public class HomeController {
 	}
 		
 	@RequestMapping("/get/cdr/{number}")
-	public String getNumberCDR(@PathVariable("number")String number){
+	public void getNumberCDR(@PathVariable("number")String number){
 		String response="";
 		try {
 			URL url = new URL(ARCHIVO_URL_SQL + "/" + number);
@@ -56,17 +64,18 @@ public class HomeController {
 			BufferedReader br = new BufferedReader(in);
 			String output;
 			while((output = br.readLine()) != null){
-				System.out.println(output);
+				//System.out.println(output);
 				response += output;
 			}
-			decoder(response);
 			
+			ricardo.setNombre(response);
 		} catch(Exception e) {
 			 System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 	         System.exit(0);
 		}
-		return response;
+		//ViewController view = new ViewController();
 	}
+	
 	
 	@RequestMapping("/mensaje")
     public String mensaje() {
@@ -75,10 +84,10 @@ public class HomeController {
 	
 	@Autowired
 	private RestTemplate restTemplate;
-	
+	/*
 	@RequestMapping(value = "/")
 	public static String Welcome() {
 		return "Welcome to Spring Boot";
 	}
-	
+	*/
 }
