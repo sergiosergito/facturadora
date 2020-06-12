@@ -29,6 +29,7 @@ public class ViewController extends HttpServlet{
 	private final static String INVOICE_HTML = "invoice.html";
 	private final static String ARCHIVO_URL_SQL = "http://localhost:4567/sql/facturar/70712345";
 	private final static String HOME_HTML = "home.html";
+	private final static String WELCOME_JSP = "welcome.jsp";
 	SoyUnico ricardo = SoyUnico.getSingletonInstance("Ricardo Moya");
 	
 	@RequestMapping(value = "/")
@@ -47,6 +48,12 @@ public class ViewController extends HttpServlet{
 	public String showInvoice() {
 		System.out.println(ricardo.getNombre());
 		return INVOICE_HTML;
+	}
+	
+	@RequestMapping(value = "/welcome")
+	public String showWelcome() {
+		System.out.println(ricardo.getNombre());
+		return WELCOME_JSP;
 	}
 	
 	

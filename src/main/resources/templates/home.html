@@ -10,6 +10,28 @@
 			<p>Numero:<input type = "text" name = "n1"></p>
 			<p><input type = "submit" name = "" value="Generar Factura"></p>
 		</form>
-		<a href = "/invoice">[Ir a Factura]</a>
+		<form action="http://localhost:8081/invoice">
+    		<input type="submit" value="Go to Google" />
+		</form>
+		<form action="http://localhost:8081/invoice" method="get">
+		  <label for="fname">First name:</label>
+		  <input type="text" id="fname" name="fname"><br><br>
+		  <label for="lname">Last name:</label>
+		  <input type="text" id="lname" name="lname"><br><br>
+		  <input type="submit" value="Submit">
+		</form>
+		
+		<form action="http://localhost:8081/get/cdr/" method="get">
+		  <label for="numero">numero:</label>
+		  <input type="text" id="fname" name="fname"><br><br>
+		  <input type="submit" value="Submit">
+		</form>
+		
+		<form action="http://localhost:8081/get/cdr/70712345" method="get">
+		  <label for="numero">numerito:</label>
+		  <input type="text" id="fname" name="fname"><br><br>
+		  <input type="submit" value="Submit">
+		</form>
+		
 	</body>
 </html>
